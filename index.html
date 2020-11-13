@@ -13,7 +13,7 @@
         text-decoration: none;
   		outline: none;
         display: inline-block;
-		width: 400px;
+		width: 450px;
 		height: 45px;
         font-size: 18px;
         margin: 4px 2px;
@@ -53,17 +53,15 @@
   <h1>This is home page.</h1>
   
   <body>
-    <h2>Player</h2>
-    <audio controls autoplay id="audioPlayer" >
-      <source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-    </audio>
-	
-
-	<p id="demo"></p>
+    <div>
+        <h2>Player</h2>
+        <audio controls autoplay id="audioPlayer" >
+            <source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 
 	<script>
-	
 	function myFunction(song) {
 	  //document.querySelector("player > source").src = "D:\\desktop\\fuck\\Adam Levine - Lost Stars"
 	  var path = "./Music/" + song + ".mp3";
@@ -76,7 +74,7 @@
     <h2>Music list</h2>
 		<li><input type="button" class="button button2" value="Adam Levine - Lost Stars" onclick="myFunction('Adam Levine - Lost Stars')"></li>
 		<li><input type="button" class="button button2" value="Amir - Longtemps" onclick="myFunction('Amir - Longtemps')"></li>
-		<li><input type="button" class="button button2" value="Boys Like Girls - Two Is Better Than One" onclick="myFunction('Boys Like Girls - Two Is Better Than One.mp3')"></li>
+		<li><input type="button" class="button button2" value="Boys Like Girls - Two Is Better Than One" onclick="myFunction('Boys Like Girls - Two Is Better Than One')"></li>
 		<li><input type="button" class="button button2" value="Coldplay - Fix You" onclick="myFunction('Coldplay - Fix You')"></li>
 		<li><input type="button" class="button button2" value="Coldplay - Paradise" onclick="myFunction('Coldplay - Paradise')"></li>
 		<li><input type="button" class="button button2" value="Daniel Powter - Bad Day" onclick="myFunction('Daniel Powter - Bad Day')"></li>
