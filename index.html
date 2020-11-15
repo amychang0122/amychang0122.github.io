@@ -53,8 +53,17 @@
 				background-color: #008CBA;
 				color: white;
 			}
+			.myDiv {
+				border: 5px outset lightblue;
+				background-color: white;    
+				text-align: left;
+				text-indent: 20px;
+				margin-top: 10px;
+				width: 400px;
+				color: lightblue;
+			}
 		</style>
-		<title>Test 20201114_12:34</title>
+		<title>Test 20201108</title>
 	</head>
   
 	<h1>This is home page.</h1>
@@ -63,22 +72,53 @@
 		<div id="menu">
 			<h2>Player</h2>
 			<audio controls autoplay id="audioPlayer" >
-			  <source id="player" src="C:/Users/子祐/Downloads/Music/Amir - Longtemps.mp3" type="audio/mpeg">
-			Your browser does not support the audio element.
+				<source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
 			</audio>
+			<h2 id="list" color="black">List</h2>
+			<div class="myDiv" id="list2">
+			</div>
 		</div>
 
-	<script>
-	function myFunction(song) {
-	  //document.querySelector("player > source").src = "D:\\desktop\\fuck\\Adam Levine - Lost Stars"
-	  var path = "./Music/" + song + ".mp3";
-	  document.getElementById("player").src = path;
-	  document.getElementById("audioPlayer").load();
-	  document.getElementById("audioPlayer").play();
-	}
-	</script>
+		<h2 id="demo"></h2>
+
+		<script>
+		var chansons = [];
+		document.getElementById("audioPlayer").onended = function(){
+			if (chansons.length!=0){
+				chansons.push(chansons[0]);
+				chansons.shift();
+				var path = "./Music/" + chansons[0] + ".mp3";
+				update_list();
+				//var path = "C:/Users/子祐/Downloads/Music/" + song + ".mp3";
+				document.getElementById("player").src = path;
+				document.getElementById("audioPlayer").load();
+				document.getElementById("audioPlayer").play();
+			}
+		};
+		function update_list(){
+			var text = "";
+			for (i = 0; i < chansons.length; i++) {
+				text += "<h3>" + chansons[i] + "</h3>";
+			}
+			document.getElementById("list2").innerHTML = text;
+		}
+		function myFunction(song) {
+			//document.querySelector("player > source").src = "D:\\desktop\\fuck\\Adam Levine - Lost Stars"
+			chansons.push(song);
+			if (chansons.length==1){
+				var path = "./Music/" + song + ".mp3";
+				//var path = "C:/Users/子祐/Downloads/Music/" + song + ".mp3";
+				document.getElementById("player").src = path;
+				document.getElementById("audioPlayer").load();
+				document.getElementById("audioPlayer").play();
+			}
+			update_list();
+		}
+		</script>
 	
-    <h2>Music list</h2>
+		<h2>Music list</h2>
+		<li><input type="button" class="button button2" value="Show the music list." onclick="update_list()"></li>
 		<li><input type="button" class="button button2" value="Adam Levine - Lost Stars" onclick="myFunction('Adam Levine - Lost Stars')"></li>
 		<li><input type="button" class="button button2" value="Amir - Longtemps" onclick="myFunction('Amir - Longtemps')"></li>
 		<li><input type="button" class="button button2" value="Boys Like Girls - Two Is Better Than One" onclick="myFunction('Boys Like Girls - Two Is Better Than One')"></li>
@@ -111,6 +151,6 @@
 		<li><input type="button" class="button button2" value="滅火器 Fire EX. - 長途夜車" onclick="myFunction('滅火器 Fire EX. - 長途夜車')"></li>
 		<li><input type="button" class="button button2" value="茄子蛋 - 浪子回頭" onclick="myFunction('茄子蛋 - 浪子回頭')"></li>
 		<li><input type="button" class="button button2" value="茄子蛋 - 浪流連" onclick="myFunction('茄子蛋 - 浪流連')"></li>
-    
-  </body>
+		
+	</body>
 </html>
