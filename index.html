@@ -32,8 +32,10 @@
 			}
 
 			.button1 {
-				text-align: left;
-				width: auto;
+				text-align: center;
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 100px;
 				background-color: white; 
 				color: black; 
 				border: 4px solid #4CAF50;
@@ -130,39 +132,8 @@
 			}
 			update_list();
 		}
-		var songs = [
-			"Adam Levine - Lost Stars", 
-			"Amir - Longtemps", 
-			"Boys Like Girls - Two Is Better Than One",
-			"Coldplay - Fix You",
-			"Coldplay - paradise",
-			"Daniel Powter - Bad Day",
-			"Daniel Powter - Best Of Me",
-			"Daniel Powter - Free Loop",
-			"Daniel Powter - Whole World Around",
-			"Jason Mraz Colbie Caillat - Lucky",
-			"Joyce Jonathan - Je ne sais pas",
-			"Joyce Jonathan, Vianney - Les filles d’aujourdhui",
-			"Lady Gaga - Million Reasons",
-			"Lady Gaga, Bradley Cooper - Shallow",
-			"Passenger - Let Her Go",
-			"Taylor Swift - Everything Has Changed ft. Ed Sheeran",
-			"Taylor Swift - Gorgeous",
-			"Taylor Swift - I Knew You Were Trouble",
-			"The Chainsmokers Coldplay - Something Just Like This",
-			"The Script - The Man Who Can’t Be Moved",
-			"Vising - 長大以後",
-			"周杰倫 - 擱淺",
-			"周杰倫 - 楓",
-			"周杰倫 - 藉口",
-			"周杰倫 - 軌跡",
-			"孫燕姿 - 我懷念的",
-			"家家 - 家家酒",
-			"李榮浩 - 老街",
-			"林宥嘉 - 成全",
-			"滅火器 Fire EX. - 長途夜車",
-			"茄子蛋 - 浪子回頭",
-			"茄子蛋 - 浪流連"];
+		
+		var songs = ["Adam Levine - Lost Stars","Amir - Longtemps","Boys Like Girls - Two Is Better Than One","Coldplay - Fix You","Coldplay - Paradise","Daniel Powter - Bad Day","Daniel Powter - Best Of Me","Daniel Powter - Free Loop","Daniel Powter - Whole World Around","Jason Mraz Colbie Caillat - Lucky","Joyce Jonathan - Je ne sais pas","Joyce Jonathan, Vianney - Les filles d’aujourdhui","Lady Gaga - Million Reasons","Lady Gaga, Bradley Cooper - Shallow","Maple story","MapleStory BGM Amorian Challenge","MapleStory BGM Ellin Forest","MapleStory BGM Ellinia Missing You","MapleStory BGM Ellinia Moonlight Shadow","MapleStory BGM Ellinia When the Morning Comes","MapleStory BGM Henesys Cava Bien","MapleStory BGM Lith Harbor Above the Treetops","MapleStory BGM Ludibrium Fantasia","MapleStory BGM Ludibrium Funny Time Maker","MapleStory BGM Orbis Upon the Sky","MapleStory BGM Temple of Time","MapleStory [冰原雪域村內] El Nath Snowy Village","MapleStory [冰原雪域村外] El Nath Snowy Village","MapleStory [天空之城] Orbis Shinin Harbor","MapleStory [天空之塔]Orbis Come with Me","MapleStory [奇幻村] Sleepywood","MapleStory [弓箭手村] Henesys Cava Bien","MapleStory [愛奧斯塔外] Ludibrium High Enough","MapleStory [時間通道] Ludibrium Wherever You Are","MapleStory [時間通道右] Ludibrium Timeless","MapleStory [時間通道左] Ludibrium Fairytale fast","MapleStory [時間通道左] Ludibrium Fairytale","MapleStory [水世界] Aquarium","MapleStory [水世界上路] Aqua Road Shining Sea","MapleStory [童話村] Leafre","MapleStory [飛船上] Ludibrium Flying in a Blue Dream","Passenger - Let Her Go","Taylor Swift - Everything Has Changed ft. Ed Sheeran","Taylor Swift - Gorgeous","Taylor Swift - I Knew You Were Trouble","The Chainsmokers Coldplay - Something Just Like This","The Script - The Man Who Can’t Be Moved","Vising - 長大以後","周杰倫 - 擱淺","周杰倫 - 楓","周杰倫 - 藉口","周杰倫 - 軌跡","孫燕姿 - 我懷念的","家家 - 家家酒","李榮浩 - 老街","林宥嘉 - 成全","滅火器 Fire EX. - 長途夜車","茄子蛋 - 浪子回頭","茄子蛋 - 浪流連","鄭興 - 城南","閻奕格 - 也可以","陳奕迅 - 讓我留在你身邊"];
 		
 		var division = document.getElementById("music_list");
 		var title = document.createElement("h2");
