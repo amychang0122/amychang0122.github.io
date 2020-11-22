@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width-device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<style>
 			#menu {
@@ -33,9 +32,11 @@
 			}
 
 			.button1 {
+				text-align: left;
+				width: auto;
 				background-color: white; 
 				color: black; 
-				border: 2px solid #4CAF50;
+				border: 4px solid #4CAF50;
 			}
 
 			.button1:hover {
@@ -59,8 +60,10 @@
 				text-align: left;
 				text-indent: 20px;
 				margin-top: 10px;
-				width: 400px;
+				width: 500px;
+				height: 500px;
 				color: lightblue;
+				overflow: scroll;
 			}
 		</style>
 		<title>Test 20201108</title>
@@ -75,27 +78,36 @@
 				<source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
 				Your browser does not support the audio element.
 			</audio>
+			<input type="button" class="button button1" value="Skip" onclick="skip_music()">
+			<input type="button" class="button button1" value="Delete" onclick="delete_music()">
 			<h2 id="list" color="black">List</h2>
 			<div class="myDiv" id="list2">
 			</div>
 		</div>
 
-		<h2 id="demo"></h2>
+		<div id="music_list">
+		</div>
 
 		<script>
 		var chansons = [];
-		document.getElementById("audioPlayer").onended = function(){
-			if (chansons.length!=0){
-				chansons.push(chansons[0]);
-				chansons.shift();
-				var path = "./Music/" + chansons[0] + ".mp3";
-				update_list();
-				//var path = "C:/Users/子祐/Downloads/Music/" + song + ".mp3";
-				document.getElementById("player").src = path;
-				document.getElementById("audioPlayer").load();
-				document.getElementById("audioPlayer").play();
-			}
-		};
+		document.getElementById("audioPlayer").onended = function(){skip_music()};
+		function skip_music(){
+			chansons.push(chansons[0]);
+			chansons.shift();
+			var path = "./Music/" + chansons[0] + ".mp3";
+			update_list();
+			document.getElementById("player").src = path;
+			document.getElementById("audioPlayer").load();
+			document.getElementById("audioPlayer").play();
+		}
+		function delete_music(){
+			chansons.shift();
+			var path = "./Music/" + chansons[0] + ".mp3";
+			update_list();
+			document.getElementById("player").src = path;
+			document.getElementById("audioPlayer").load();
+			document.getElementById("audioPlayer").play();
+		}
 		function update_list(){
 			var text = "";
 			for (i = 0; i < chansons.length; i++) {
@@ -103,54 +115,80 @@
 			}
 			document.getElementById("list2").innerHTML = text;
 		}
-		function myFunction(song) {
-			//document.querySelector("player > source").src = "D:\\desktop\\fuck\\Adam Levine - Lost Stars"
+		function Add_to_list(song) {
+			if (this.class!="button button2"){
+				this.class = "button button1";
+			}
+			//background-color: #4CAF50;
+			//color: white;
 			chansons.push(song);
 			if (chansons.length==1){
 				var path = "./Music/" + song + ".mp3";
-				//var path = "C:/Users/子祐/Downloads/Music/" + song + ".mp3";
 				document.getElementById("player").src = path;
 				document.getElementById("audioPlayer").load();
 				document.getElementById("audioPlayer").play();
 			}
 			update_list();
 		}
+		var songs = [
+			"Adam Levine - Lost Stars", 
+			"Amir - Longtemps", 
+			"Boys Like Girls - Two Is Better Than One",
+			"Coldplay - Fix You",
+			"Coldplay - paradise",
+			"Daniel Powter - Bad Day",
+			"Daniel Powter - Best Of Me",
+			"Daniel Powter - Free Loop",
+			"Daniel Powter - Whole World Around",
+			"Jason Mraz Colbie Caillat - Lucky",
+			"Joyce Jonathan - Je ne sais pas",
+			"Joyce Jonathan, Vianney - Les filles d’aujourdhui",
+			"Lady Gaga - Million Reasons",
+			"Lady Gaga, Bradley Cooper - Shallow",
+			"Passenger - Let Her Go",
+			"Taylor Swift - Everything Has Changed ft. Ed Sheeran",
+			"Taylor Swift - Gorgeous",
+			"Taylor Swift - I Knew You Were Trouble",
+			"The Chainsmokers Coldplay - Something Just Like This",
+			"The Script - The Man Who Can’t Be Moved",
+			"Vising - 長大以後",
+			"周杰倫 - 擱淺",
+			"周杰倫 - 楓",
+			"周杰倫 - 藉口",
+			"周杰倫 - 軌跡",
+			"孫燕姿 - 我懷念的",
+			"家家 - 家家酒",
+			"李榮浩 - 老街",
+			"林宥嘉 - 成全",
+			"滅火器 Fire EX. - 長途夜車",
+			"茄子蛋 - 浪子回頭",
+			"茄子蛋 - 浪流連"];
+		
+		var division = document.getElementById("music_list");
+		var title = document.createElement("h2");
+		var node = document.createTextNode("Music list");
+		title.appendChild(node);
+		division.appendChild(title);
+		for (i=0; i<songs.length+1; ++i){
+			var list = document.createElement("li");
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.className = "button button2";
+			if (i==0){
+				btn.value = "Show the music list.";
+				btn.onclick = update_list;
+				list.appendChild(btn);
+				division.appendChild(list);
+			}
+			else{
+				btn.value = songs[i-1];
+				btn.onclick = function(){Add_to_list(this.value)};
+				list.appendChild(btn);
+				division.appendChild(list);
+			}
+		}
 		</script>
 	
-		<h2>Music list</h2>
-		<li><input type="button" class="button button2" value="Show the music list." onclick="update_list()"></li>
-		<li><input type="button" class="button button2" value="Adam Levine - Lost Stars" onclick="myFunction('Adam Levine - Lost Stars')"></li>
-		<li><input type="button" class="button button2" value="Amir - Longtemps" onclick="myFunction('Amir - Longtemps')"></li>
-		<li><input type="button" class="button button2" value="Boys Like Girls - Two Is Better Than One" onclick="myFunction('Boys Like Girls - Two Is Better Than One')"></li>
-		<li><input type="button" class="button button2" value="Coldplay - Fix You" onclick="myFunction('Coldplay - Fix You')"></li>
-		<li><input type="button" class="button button2" value="Coldplay - Paradise" onclick="myFunction('Coldplay - Paradise')"></li>
-		<li><input type="button" class="button button2" value="Daniel Powter - Bad Day" onclick="myFunction('Daniel Powter - Bad Day')"></li>
-		<li><input type="button" class="button button2" value="Daniel Powter - Best Of Me" onclick="myFunction('Daniel Powter - Best Of Me')"></li>
-		<li><input type="button" class="button button2" value="Daniel Powter - Free Loop" onclick="myFunction('Daniel Powter - Free Loop')"></li>
-		<li><input type="button" class="button button2" value="Daniel Powter - Whole World Around" onclick="myFunction('Daniel Powter - Whole World Around')"></li>
-		<li><input type="button" class="button button2" value="Jason Mraz Colbie Caillat - Lucky" onclick="myFunction('Jason Mraz Colbie Caillat - Lucky')"></li>
-		<li><input type="button" class="button button2" value="Joyce Jonathan - Je ne sais pas" onclick="myFunction('Joyce Jonathan - Je ne sais pas')"></li>
-		<li><input type="button" class="button button2" value="Joyce Jonathan, Vianney - Les filles d’aujourdhui" onclick="myFunction('Joyce Jonathan, Vianney - Les filles d’aujourdhui')"></li>
-		<li><input type="button" class="button button2" value="Lady Gaga - Million Reasons" onclick="myFunction('Lady Gaga - Million Reasons')"></li>
-		<li><input type="button" class="button button2" value="Lady Gaga, Bradley Cooper - Shallow" onclick="myFunction('Lady Gaga, Bradley Cooper - Shallow')"></li>
-		<li><input type="button" class="button button2" value="Passenger - Let Her Go" onclick="myFunction('Passenger - Let Her Go')"></li>
-		<li><input type="button" class="button button2" value="Taylor Swift - Everything Has Changed ft. Ed Sheeran" onclick="myFunction('Taylor Swift - Everything Has Changed ft. Ed Sheeran')"></li>
-		<li><input type="button" class="button button2" value="Taylor Swift - Gorgeous" onclick="myFunction('Taylor Swift - Gorgeous')"></li>
-		<li><input type="button" class="button button2" value="Taylor Swift - I Knew You Were Trouble" onclick="myFunction('Taylor Swift - I Knew You Were Trouble')"></li>
-		<li><input type="button" class="button button2" value="The Chainsmokers Coldplay - Something Just Like This" onclick="myFunction('The Chainsmokers Coldplay - Something Just Like This')"></li>
-		<li><input type="button" class="button button2" value="The Script - The Man Who Can’t Be Moved" onclick="myFunction('The Script - The Man Who Can’t Be Moved')"></li>
-		<li><input type="button" class="button button2" value="Vising - 長大以後" onclick="myFunction('Vising - 長大以後')"></li>
-		<li><input type="button" class="button button2" value="周杰倫 - 擱淺" onclick="myFunction('周杰倫 - 擱淺')"></li>
-		<li><input type="button" class="button button2" value="周杰倫 - 楓" onclick="myFunction('周杰倫 - 楓')"></li>
-		<li><input type="button" class="button button2" value="周杰倫 - 藉口" onclick="myFunction('周杰倫 - 藉口')"></li>
-		<li><input type="button" class="button button2" value="周杰倫 - 軌跡" onclick="myFunction('周杰倫 - 軌跡')"></li>
-		<li><input type="button" class="button button2" value="孫燕姿 - 我懷念的" onclick="myFunction('孫燕姿 - 我懷念的')"></li>
-		<li><input type="button" class="button button2" value="家家 - 家家酒" onclick="myFunction('家家 - 家家酒')"></li>
-		<li><input type="button" class="button button2" value="李榮浩 - 老街" onclick="myFunction('李榮浩 - 老街')"></li>
-		<li><input type="button" class="button button2" value="林宥嘉 - 成全" onclick="myFunction('林宥嘉 - 成全')"></li>
-		<li><input type="button" class="button button2" value="滅火器 Fire EX. - 長途夜車" onclick="myFunction('滅火器 Fire EX. - 長途夜車')"></li>
-		<li><input type="button" class="button button2" value="茄子蛋 - 浪子回頭" onclick="myFunction('茄子蛋 - 浪子回頭')"></li>
-		<li><input type="button" class="button button2" value="茄子蛋 - 浪流連" onclick="myFunction('茄子蛋 - 浪流連')"></li>
 		
 	</body>
 </html>
