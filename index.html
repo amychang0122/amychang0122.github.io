@@ -68,7 +68,7 @@
 				overflow: scroll;
 			}
 		</style>
-		<title>Test 20201108</title>
+		<title id="title">Test 20201108</title>
 	</head>
   
 	<h1>This is home page.</h1>
@@ -115,6 +115,7 @@
 			for (i = 0; i < chansons.length; i++) {
 				text += "<h3>" + chansons[i] + "</h3>";
 			}
+			document.getElementById("title").innerHTML = chansons[0];
 			document.getElementById("list2").innerHTML = text;
 		}
 		function Add_to_list(song) {
