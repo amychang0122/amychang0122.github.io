@@ -73,7 +73,7 @@
 				overflow: scroll;
 			}
 		</style>
-		<title id="title">Test 20201108</title>
+		<title id="title">Music</title>
 	</head>
   
 	<h1>This is home page.</h1>
@@ -120,7 +120,7 @@
 			for (i = 0; i < chansons.length; i++) {
 				text += "<h3>" + chansons[i] + "</h3>";
 			}
-			document.getElementById("title").innerHTML = chansons[0];
+			document.getElementById("title").innerHTML = (chansons.length == 0 ? "Music" : chansons[0]);
 			document.getElementById("list2").innerHTML = text;
 		}
 		function change_to_list(song, pressed) {
@@ -130,14 +130,10 @@
 			}else{
 				chansons.push(song);
 			}
-			//background-color: #4CAF50;
-			//color: white;
-			if (chansons.length==1){
-				var path = "./Music/" + song + ".mp3";
-				document.getElementById("player").src = path;
-				document.getElementById("audioPlayer").load();
-				document.getElementById("audioPlayer").play();
-			}
+			var path = "./Music/" + chansons[0] + ".mp3";
+			document.getElementById("player").src = path;
+			document.getElementById("audioPlayer").load();
+			document.getElementById("audioPlayer").play();
 			update_list();
 		}
 		
