@@ -3,13 +3,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<style>
-			#main_console {
-				position: fixed;
-				left: 550;
+			.play_console {
+                float: left;
+                padding:0 8px;
 				top: 5%;
-				width: 8em;
-				margin-top: -2.5em;
+				width: auto;
 			}
 			.button {
 				background-color: white;	/* #4CAF50-->*/
@@ -63,37 +64,40 @@
 			}
 			.myDiv {
 				border: 5px outset lightblue;
-				background-color: white;    
+				background-color: rgb(255, 255, 255);    
 				text-align: left;
 				text-indent: 20px;
 				margin-top: 10px;
 				width: 500px;
-				height: 300px;
+				height: 500px;
 				color: lightblue;
 				overflow: scroll;
 			}
 		</style>
 		<title id="title">Music</title>
 	</head>
-  
-	<h1>This is home page.</h1>
-  
-	<body>
-		<div id="main_console">
-			<h2>Player</h2>
-			<audio controls autoplay id="audioPlayer" >
-				<source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
-				Your browser does not support the audio element.
-			</audio>
-			<input type="button" class="button button1" value="Skip" onclick="skip_music()">
-			<input type="button" class="button button1" value="Delete" onclick="delete_music()">
-			<h2 id="list" color="black">List</h2>
-			<div class="myDiv" id="list2">
-			</div>
-		</div>
 
-		<div id="music_list" position="fixed" left="5%" top="10%">
-		</div>
+	<body>
+        <div>
+            <h1>This is first page.</h1>
+        </div>
+        <div id="music_console">
+            <div class="play_console" id="play_console">
+                <h2>Player</h2>
+                <audio controls autoplay id="audioPlayer" >
+                    <source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <input type="button" class="button button1" value="Skip" onclick="skip_music()">
+                <input type="button" class="button button1" value="Delete" onclick="delete_music()">
+                <h2 id="list" color="black">List</h2>
+                <div class="myDiv" id="list2">
+                </div>
+            </div>
+            <div class="play_console" id="music_list" height="800px" >
+            </div>
+
+        </div>
 
 		<script>
 		var chansons = [];
