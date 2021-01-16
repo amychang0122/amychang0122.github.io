@@ -1,0 +1,182 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<style>
+			#main_console {
+				position: fixed;
+				left: 550;
+				top: 5%;
+				width: 8em;
+				margin-top: -2.5em;
+			}
+			.button {
+				background-color: white;	/* #4CAF50-->*/
+				border: 4px solid #66ccff;
+				padding-left: 20px;
+				text-align: left;
+				text-decoration: none;
+				outline: none;
+				display: inline-block;
+				width: 500px;
+				height: 45px;
+				font-size: 18px;
+				margin: 4px 2px;
+				transition-duration: 0.4s;
+				cursor: pointer;
+				border-radius: 15px;
+			}
+			.button:active {
+				transform: translateY(-8px);
+			}
+
+			.button1 {
+				text-align: center;
+				padding-left: 10px;
+				padding-right: 10px;
+				width: 100px;
+				background-color: white; 
+				color: black; 
+				border: 4px solid #4CAF50;
+			}
+
+			.button1:hover {
+				background-color: #4CAF50;
+				color: white;
+			}
+
+			.button2 {
+				background-color: white; 
+				color: black; 
+				border: 2px solid #008CBA;
+			}
+			.button2_clicked {
+				background-color: #008CBA; 
+				color: white; 
+				border: 2px solid black;
+			}
+
+			.button2:hover {
+				background-color: #008CBA;
+				color: white;
+			}
+			.myDiv {
+				border: 5px outset lightblue;
+				background-color: white;    
+				text-align: left;
+				text-indent: 20px;
+				margin-top: 10px;
+				width: 500px;
+				height: 300px;
+				color: lightblue;
+				overflow: scroll;
+			}
+		</style>
+		<title id="title">Music</title>
+	</head>
+  
+	<h1>This is home page.</h1>
+  
+	<body>
+		<div id="main_console">
+			<h2>Player</h2>
+			<audio controls autoplay id="audioPlayer" >
+				<source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
+			</audio>
+			<input type="button" class="button button1" value="Skip" onclick="skip_music()">
+			<input type="button" class="button button1" value="Delete" onclick="delete_music()">
+			<h2 id="list" color="black">List</h2>
+			<div class="myDiv" id="list2">
+			</div>
+		</div>
+
+		<div id="music_list" position="fixed" left="5%" top="10%">
+		</div>
+
+		<script>
+		var chansons = [];
+		document.getElementById("audioPlayer").onended = function(){skip_music()};
+		function skip_music(){
+			chansons.push(chansons[0]);
+			chansons.shift();
+			var path = "./Music/" + chansons[0] + ".mp3";
+			update_list();
+			document.getElementById("player").src = path;
+			document.getElementById("audioPlayer").load();
+			document.getElementById("audioPlayer").play();
+		}
+		function delete_music(){
+			chansons.shift();
+			var path = "./Music/" + chansons[0] + ".mp3";
+			update_list();
+			document.getElementById("player").src = path;
+			document.getElementById("audioPlayer").load();
+			document.getElementById("audioPlayer").play();
+		}
+		function update_list(){
+			var text = "";
+			for (i = 0; i < chansons.length; i++) {
+				text += "<h3>" + (i+1) + ". " + chansons[i] + "</h3>";
+			}
+			document.getElementById("title").innerHTML = (chansons.length == 0 ? "Music" : chansons[0]);
+			document.getElementById("list2").innerHTML = text;
+		}
+		function change_to_list(song, pressed) {
+			var pos;
+			if (pressed){
+				pos = chansons.indexOf(song);
+				chansons.splice(pos, 1);	// 從歌單移除歌曲
+			}else{
+				chansons.push(song);	// 新增歌曲到歌單
+			}
+			if (pos==0 || chansons.length==1){
+				var path = "./Music/" + chansons[0] + ".mp3";
+				document.getElementById("player").src = path;
+				document.getElementById("audioPlayer").load();
+				document.getElementById("audioPlayer").play();
+			}
+			update_list();
+		}
+		
+		var songs = ["Adam Levine - Lost Stars","Amir - Longtemps","Boys Like Girls - Two Is Better Than One","Coldplay - Fix You","Coldplay - Paradise","Daniel Powter - Bad Day","Daniel Powter - Best Of Me","Daniel Powter - Free Loop","Daniel Powter - Whole World Around","Jason Mraz Colbie Caillat - Lucky","Joyce Jonathan - Je ne sais pas","Joyce Jonathan, Vianney - Les filles d'aujourdhui","Joyce Jonathan, Vianney - Les filles d’aujourdhui","Lady Gaga - Million Reasons","Lady Gaga, Bradley Cooper - Shallow","MapleStory BGM Amorian Challenge","MapleStory BGM Ellin Forest","MapleStory BGM Ellinia Missing You","MapleStory BGM Ellinia Moonlight Shadow","MapleStory BGM Ellinia When the Morning Comes","MapleStory BGM Henesys Cava Bien","MapleStory BGM Lith Harbor Above the Treetops","MapleStory BGM Ludibrium Fantasia","MapleStory BGM Ludibrium Funny Time Maker","MapleStory BGM Orbis Upon the Sky","MapleStory BGM Temple of Time","MapleStory [冰原雪域村內] El Nath Snowy Village","MapleStory [冰原雪域村外] El Nath Snowy Village","MapleStory [天空之城] Orbis Shinin Harbor","MapleStory [天空之塔]Orbis Come with Me","MapleStory [奇幻村] Sleepywood","MapleStory [弓箭手村] Henesys Cava Bien","MapleStory [愛奧斯塔外] Ludibrium High Enough","MapleStory [時間通道] Ludibrium Wherever You Are","MapleStory [時間通道右] Ludibrium Timeless","MapleStory [時間通道左] Ludibrium Fairytale fast","MapleStory [時間通道左] Ludibrium Fairytale","MapleStory [水世界] Aquarium","MapleStory [水世界上路] Aqua Road Shining Sea","MapleStory [童話村] Leafre","MapleStory [飛船上] Ludibrium Flying in a Blue Dream","Passenger - Let Her Go","Taylor Swift - Everything Has Changed ft. Ed Sheeran","Taylor Swift - Gorgeous","Taylor Swift - I Knew You Were Trouble","The Chainsmokers Coldplay - Something Just Like This","The Script - The Man Who Can’t Be Moved","Vising - 長大以後","周杰倫 - 擱淺","周杰倫 - 楓","周杰倫 - 藉口","周杰倫 - 軌跡","孫燕姿 - 我懷念的","家家 - 家家酒","李榮浩 - 老街","林宥嘉 - 成全","滅火器 Fire EX. - 長途夜車 Southbound Night Bus Lyric Video","滅火器 Fire EX. - 長途夜車","茄子蛋 - 浪子回頭","茄子蛋 - 浪流連","鄭興 - 城南","閻奕格 - 也可以","陳奕迅 - 讓我留在你身邊"];
+		
+		var division = document.getElementById("music_list");
+		var title = document.createElement("h2");
+		var node = document.createTextNode("Music list");
+		title.appendChild(node);
+		division.appendChild(title);
+		for (i=0; i<songs.length+1; ++i){
+			var list = document.createElement("li");
+			var btn = document.createElement("input");
+			btn.type = "button";
+			btn.className = "button button2";
+			btn.pressed = false;
+			if (i==0){
+				btn.value = "Show the music list.";
+				btn.onclick = update_list;
+				list.appendChild(btn);
+				division.appendChild(list);
+			}
+			else{
+				btn.value = songs[i-1];
+				btn.onclick = function(){
+					change_to_list(this.value, this.pressed);
+					if (this.pressed){
+						this.pressed = false;
+						this.className = "button button2";
+					}else{
+						this.pressed = true;
+						this.className = "button button2_clicked";
+					}
+				};
+				list.appendChild(btn);
+				division.appendChild(list);
+			}
+		}
+		</script>
+	
+		
+	</body>
+</html>
