@@ -108,9 +108,10 @@
 			document.getElementById("audioPlayer").play();
 		}
 		function delete_music(){
-			chansons.shift();
+            document.getElementById(chansons[0]).click();
+			//chansons.shift();
 			var path = "./Music/" + chansons[0] + ".mp3";
-			update_list();
+            update_list();
 			document.getElementById("player").src = path;
 			document.getElementById("audioPlayer").load();
 			document.getElementById("audioPlayer").play();
@@ -149,17 +150,19 @@
 		division.appendChild(title);
 		for (i=0; i<songs.length+1; ++i){
 			var list = document.createElement("li");
-			var btn = document.createElement("input");
+            var btn = document.createElement("input");
 			btn.type = "button";
 			btn.className = "button button2";
 			btn.pressed = false;
 			if (i==0){
+                btn.id = "Show the music list.";
 				btn.value = "Show the music list.";
 				btn.onclick = update_list;
 				list.appendChild(btn);
 				division.appendChild(list);
 			}
 			else{
+				btn.id = songs[i-1];
 				btn.value = songs[i-1];
 				btn.onclick = function(){
 					change_to_list(this.value, this.pressed);
