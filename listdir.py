@@ -2,7 +2,7 @@ from os import listdir
 import os, time
 import shutil
 
-print('???')
+print('????')
 files = listdir("./Music")
 f = open("./music_list.txt", "w", encoding="utf-8")
 for i in range(len(files)):
@@ -16,9 +16,10 @@ f.close()
 # backup file
 localtime = time.asctime( time.localtime(time.time()) )
 web = "./index.html"
-backup = "./index_" + time.strftime("%m%d", time.localtime()) + ".html"
+backup = "./Backup/index_" + time.strftime("%m%d", time.localtime()) + ".html"
 if not os.path.isfile(backup):
     shutil.copyfile(web, backup)
+    shutil.copyfile(web, "./index_backup.html")
 
 f = open("./music_list.txt", "r", encoding="utf-8")
 read = open(backup, "r", encoding="utf-8")
