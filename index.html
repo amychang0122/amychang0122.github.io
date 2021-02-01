@@ -106,18 +106,18 @@
 		var play_list = [];
 		document.getElementById("audioPlayer").onended = function(){skip_music()};
 		function skip_music(){
-			chansons.push(chansons[0]);
-			chansons.shift();
-			var path = "./Music/" + chansons[0] + ".mp3";
+			play_list.push(play_list[0]);
+			play_list.shift();
+			var path = "./Music/" + play_list[0] + ".mp3";
 			update_list();
 			document.getElementById("player").src = path;
 			document.getElementById("audioPlayer").load();
 			document.getElementById("audioPlayer").play();
 		}
 		function delete_music(){
-            document.getElementById(chansons[0]).click();
-			//chansons.shift();
-			var path = "./Music/" + chansons[0] + ".mp3";
+            document.getElementById(play_list[0]).click();
+			//play_list.shift();
+			var path = "./Music/" + play_list[0] + ".mp3";
             update_list();
 			document.getElementById("player").src = path;
 			document.getElementById("audioPlayer").load();
@@ -127,38 +127,38 @@
 			for (i=0; i<songs.length; i++){
 				var obj = document.getElementById(songs[i]);
 				if (obj.pressed == false){
-					chansons.push(obj.value);
+					play_list.push(obj.value);
 					obj.className = "button button2_clicked";
 				}
 			}
 			update_list();
 		}
 		function shuffle(){
-			chansons.sort(() => Math.random() - 0.5);
+			play_list.sort(() => Math.random() - 0.5);
 			update_list();
-			var path = "./Music/" + chansons[0] + ".mp3";
+			var path = "./Music/" + play_list[0] + ".mp3";
 			document.getElementById("player").src = path;
 			document.getElementById("audioPlayer").load();
 			document.getElementById("audioPlayer").play();
 		}
 		function update_list(){
 			var text = "";
-			for (i = 0; i < chansons.length; i++) {
-				text += "<h3>" + (i+1) + ". " + chansons[i] + "</h3>";
+			for (i = 0; i < play_list.length; i++) {
+				text += "<h3>" + (i+1) + ". " + play_list[i] + "</h3>";
 			}
-			document.getElementById("title").innerHTML = (chansons.length == 0 ? "Music" : chansons[0]);
+			document.getElementById("title").innerHTML = (play_list.length == 0 ? "Music" : play_list[0]);
 			document.getElementById("list2").innerHTML = text;
 		}
 		function change_to_list(song, pressed) {
 			var pos;
 			if (pressed){
-				pos = chansons.indexOf(song);
-				chansons.splice(pos, 1);	// 從歌單移除歌曲
+				pos = play_list.indexOf(song);
+				play_list.splice(pos, 1);	// 從歌單移除歌曲
 			}else{
-				chansons.push(song);	// 新增歌曲到歌單
+				play_list.push(song);	// 新增歌曲到歌單
 			}
-			if (pos==0 || chansons.length==1){
-				var path = "./Music/" + chansons[0] + ".mp3";
+			if (pos==0 || play_list.length==1){
+				var path = "./Music/" + play_list[0] + ".mp3";
 				document.getElementById("player").src = path;
 				document.getElementById("audioPlayer").load();
 				document.getElementById("audioPlayer").play();
