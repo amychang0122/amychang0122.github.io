@@ -36,7 +36,7 @@
 				text-align: center;
 				padding-left: 10px;
 				padding-right: 10px;
-				width: 100px;
+				width: 110px;
 				background-color: white; 
 				color: black; 
 				border: 4px solid #4CAF50;
@@ -85,11 +85,14 @@
             <div class="play_console" id="play_console">
                 <h2>Player</h2>
                 <audio controls autoplay id="audioPlayer" >
-                    <source id="player" src="./Music/Amir - Longtemps.mp3" type="audio/mpeg">
+                    <source id="player" src="" type="audio/mpeg">
                     Your browser does not support the audio element.
-                </audio>
+				</audio>
+				<br>
                 <input type="button" class="button button1" value="Skip" onclick="skip_music()">
                 <input type="button" class="button button1" value="Delete" onclick="delete_music()">
+                <input type="button" class="button button1" value="select_all" onclick="select_all()">
+                <input type="button" class="button button1" value="shuffle" onclick="shuffle()">
                 <h2 id="list" color="black">List</h2>
                 <div class="myDiv" id="list2">
                 </div>
@@ -116,6 +119,24 @@
 			//chansons.shift();
 			var path = "./Music/" + chansons[0] + ".mp3";
             update_list();
+			document.getElementById("player").src = path;
+			document.getElementById("audioPlayer").load();
+			document.getElementById("audioPlayer").play();
+		}
+		function select_all(){
+			for (i=0; i<songs.length; i++){
+				var obj = document.getElementById(songs[i]);
+				if (obj.pressed == false){
+					chansons.push(obj.value);
+					obj.className = "button button2_clicked";
+				}
+			}
+			update_list();
+		}
+		function shuffle(){
+			chansons.sort(() => Math.random() - 0.5);
+			update_list();
+			var path = "./Music/" + chansons[0] + ".mp3";
 			document.getElementById("player").src = path;
 			document.getElementById("audioPlayer").load();
 			document.getElementById("audioPlayer").play();
