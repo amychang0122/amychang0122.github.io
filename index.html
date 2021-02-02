@@ -173,38 +173,27 @@
 		var node = document.createTextNode("Music list");
 		title.appendChild(node);
 		division.appendChild(title);
-		for (i=0; i<songs.length+1; ++i){
+		for (i=0; i<songs.length; ++i){
 			var list = document.createElement("li");
             var btn = document.createElement("input");
 			btn.type = "button";
 			btn.className = "button button2";
 			btn.pressed = false;
-			if (i==0){
-                btn.id = "Show the music list.";
-				btn.value = "Show the music list.";
-				btn.onclick = update_list;
-				list.appendChild(btn);
-				division.appendChild(list);
+			btn.id = songs[i];
+			btn.value = songs[i];
+			btn.onclick = function(){
+				change_to_list(this.value, this.pressed);
+				if (this.pressed){
+					this.pressed = false;
+					this.className = "button button2";
+				}else{
+					this.pressed = true;
+					this.className = "button button2_clicked";
+				}
 			}
-			else{
-				btn.id = songs[i-1];
-				btn.value = songs[i-1];
-				btn.onclick = function(){
-					change_to_list(this.value, this.pressed);
-					if (this.pressed){
-						this.pressed = false;
-						this.className = "button button2";
-					}else{
-						this.pressed = true;
-						this.className = "button button2_clicked";
-					}
-				};
-				list.appendChild(btn);
-				division.appendChild(list);
-			}
+			list.appendChild(btn);
+			division.appendChild(list);
 		}
 		</script>
-	
-		
 	</body>
 </html>
