@@ -111,8 +111,17 @@
 			var path = "./Music/" + play_list[0] + ".mp3";
 			update_list();
 			document.getElementById("player").src = path;
-			document.getElementById("audioPlayer").load();
-			document.getElementById("audioPlayer").play();
+			var loadPromise = document.getElementById("audioPlayer").load();
+			if (loadPromise !== undefined) {
+				loadPromise.then(_ => {
+					document.getElementById("audioPlayer").play();
+					console.log("successfully load music");
+				})
+				.catch(error => {
+					console.log("error loading music");
+				})
+			}
+			//document.getElementById("audioPlayer").play();
 		}
 		function delete_music(){
             document.getElementById(play_list[0]).click();
@@ -120,8 +129,17 @@
 			var path = "./Music/" + play_list[0] + ".mp3";
             update_list();
 			document.getElementById("player").src = path;
-			document.getElementById("audioPlayer").load();
-			document.getElementById("audioPlayer").play();
+			var loadPromise = document.getElementById("audioPlayer").load();
+			if (loadPromise !== undefined) {
+				loadPromise.then(_ => {
+					document.getElementById("audioPlayer").play();
+					console.log("successfully load music");
+				})
+				.catch(error => {
+					console.log("error loading music");
+				})
+			}
+			//document.getElementById("audioPlayer").play();
 		}
 		function select_all(){
 			for (i=0; i<songs.length; i++){
@@ -138,8 +156,17 @@
 			update_list();
 			var path = "./Music/" + play_list[0] + ".mp3";
 			document.getElementById("player").src = path;
-			document.getElementById("audioPlayer").load();
-			document.getElementById("audioPlayer").play();
+			var loadPromise = document.getElementById("audioPlayer").load();
+			if (loadPromise !== undefined) {
+				loadPromise.then(_ => {
+					document.getElementById("audioPlayer").play();
+					console.log("successfully load music");
+				})
+				.catch(error => {
+					console.log("error loading music");
+				})
+			}
+			//document.getElementById("audioPlayer").play();
 		}
 		function update_list(){
 			var text = "";
@@ -160,8 +187,17 @@
 			if (pos==0 || play_list.length==1){
 				var path = "./Music/" + play_list[0] + ".mp3";
 				document.getElementById("player").src = path;
-				document.getElementById("audioPlayer").load();
-				document.getElementById("audioPlayer").play();
+				var loadPromise = document.getElementById("audioPlayer").load();
+				if (loadPromise !== undefined) {
+						loadPromise.then(_ => {
+						document.getElementById("audioPlayer").play();
+						console.log("successfully load music");
+					})
+					.catch(error => {
+						console.log("error loading music");
+					})
+				}
+				//document.getElementById("audioPlayer").play();
 			}
 			update_list();
 		}
