@@ -224,6 +224,10 @@
 				btn.type = "button";
 				btn.className = "button button2";
 				btn.pressed = false;
+				if (play_list.indexOf(songs[i])>=0){
+					btn.pressed = true;
+					btn.className = "button button2_clicked";
+				}
 				btn.id = songs[i];
 				btn.value = songs[i];
 				btn.onclick = function(){
