@@ -2,7 +2,6 @@ from os import listdir
 import os, time
 import shutil
 
-print('????')
 files = listdir("./Music")
 f = open("./music_list.txt", "w", encoding="utf-8")
 for i in range(len(files)):
