@@ -110,6 +110,7 @@
 
 		<script>
 		var play_list = [];
+		var candidate_song = [];
 		document.getElementById("audioPlayer").onended = function(){skip_music()};
 		function skip_music(){
 			play_list.push(play_list[0]);
@@ -148,9 +149,10 @@
 			//document.getElementById("audioPlayer").play();
 		}
 		function select_all(){
-			for (i=0; i<songs.length; i++){
-				var obj = document.getElementById(songs[i]);
+			for (i=0; i<candidate_song.length; i++){
+				var obj = document.getElementById(candidate_song[i]);
 				if (obj.pressed == false){
+					obj.pressed = true;
 					play_list.push(obj.value);
 					obj.className = "button button2_clicked";
 				}
@@ -207,7 +209,8 @@
 			}
 			update_list();
 		}
-		function new_func() {		
+		function new_func() {
+			candidate_song = [];
 			var division = document.getElementById("music_list");
 			division.innerHTML = "";
 			var title = document.createElement("h2");
@@ -219,6 +222,7 @@
 				if (songs[i].split(" - ")[0]!=current_author){
 					continue
 				}
+				candidate_song.push(songs[i]);
 				var list = document.createElement("li");
 				var btn = document.createElement("input");
 				btn.type = "button";
