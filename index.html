@@ -102,8 +102,8 @@
             </div>
             <div class="play_console" id="author_console">
 				<h2>Author list</h2>
-				<select id="author_list" name="author_list" multiple  style="width:300px;height:500px" onclick="new_func()">
-				</select>
+				<div id="author_list" name="author_list" multiple  style="width:300px;height:500px" >
+				</div>
             </div>
 
         </div>
@@ -111,6 +111,7 @@
 		<script>
 		var play_list = [];
 		var candidate_song = [];
+		var candidate_author = [];
 		document.getElementById("audioPlayer").onended = function(){skip_music()};
 		function skip_music(){
 			play_list.push(play_list[0]);
@@ -149,15 +150,13 @@
 			//document.getElementById("audioPlayer").play();
 		}
 		function select_all(){
-			for (i=0; i<candidate_song.length; i++){
-				var obj = document.getElementById(candidate_song[i]);
+			for (var j=0; j<candidate_song.length; j++){
+				var obj = document.getElementById(candidate_song[j]);
 				if (obj.pressed == false){
-					obj.pressed = true;
-					play_list.push(obj.value);
-					obj.className = "button button2_clicked";
+					console.log(obj.value);
+					change_to_list(obj.value, obj.pressed)
 				}
 			}
-			update_list();
 		}
 		function shuffle(){
 			play_list.sort(() => Math.random() - 0.5);
@@ -178,19 +177,24 @@
 		}
 		function update_list(){
 			var text = "";
-			for (i = 0; i < play_list.length; i++) {
-				text += "<h3>" + (i+1) + ". " + play_list[i] + "</h3>";
+			for (var u = 0; u < play_list.length; u++) {
+				text += "<h3>" + (u+1) + ". " + play_list[u] + "</h3>";
 			}
 			document.getElementById("title").innerHTML = (play_list.length == 0 ? "Music" : play_list[0]);
 			document.getElementById("list2").innerHTML = text;
 		}
+
 		function change_to_list(song, pressed) {
 			var pos;
-			if (pressed){
+			var element = document.getElementById(song);
+			element.pressed = !(element.pressed);
+			if (element.pressed){
+				play_list.push(song);	// 新增歌曲到歌單
+				element.className = "button button2_clicked";
+			}else{
 				pos = play_list.indexOf(song);
 				play_list.splice(pos, 1);	// 從歌單移除歌曲
-			}else{
-				play_list.push(song);	// 新增歌曲到歌單
+				element.className = "button button2";
 			}
 			if (pos==0 || play_list.length==1){
 				var path = "./Music/" + play_list[0] + ".mp3";
@@ -219,8 +223,8 @@
 			division.appendChild(title);
 			var current_author = document.getElementById("author_list").value;
 			for (i=0; i<songs.length; ++i){
-				if (songs[i].split(" - ")[0]!=current_author){
-					continue
+				if (candidate_author.indexOf(songs[i].split(" - ")[0]) < 0 ) {
+					continue;
 				}
 				candidate_song.push(songs[i]);
 				var list = document.createElement("li");
@@ -236,13 +240,14 @@
 				btn.value = songs[i];
 				btn.onclick = function(){
 					change_to_list(this.value, this.pressed);
+					/*
 					if (this.pressed){
 						this.pressed = false;
 						this.className = "button button2";
 					}else{
 						this.pressed = true;
 						this.className = "button button2_clicked";
-					}
+					}*/
 				}
 				list.appendChild(btn);
 				division.appendChild(list);
@@ -255,13 +260,29 @@
 		var div = document.getElementById("author_list");
 		for (i=0; i<songs.length; ++i){
 			if (i==0 || !(songs[i-1].split(" - ")[0]==songs[i].split(" - ")[0]) && !songs[i-1].split(" - ")[0].match("MapleStory")){
-				var option = document.createElement("option");
-				option.innerText = songs[i].split(" - ")[0];	
+				var option = document.createElement("input");
+				option.type = "checkbox";
+				option.id = songs[i].split(" - ")[0];
+				option.name = songs[i].split(" - ")[0];
+				option.innerText = songs[i].split(" - ")[0];
+				option.innerHTML = songs[i].split(" - ")[0];
 				option.value = songs[i].split(" - ")[0];
+				option.onclick = function(){
+					if (this.checked) {
+						candidate_author.push(this.value);
+					} else {
+						candidate_author.splice(candidate_author.indexOf(this.value), 1);
+					}
+					new_func();
+				}
 				div.appendChild(option);
+				var label = document.createElement("label");
+				label.innerHTML = songs[i].split(" - ")[0];
+				div.appendChild(label);
+				div.appendChild(document.createElement("br"));
 			}
 		}
-
+		
 		var division = document.getElementById("music_list");
 		var current_author = document.getElementById("author_list").value;
 		for (i=0; i<songs.length; ++i){
@@ -277,13 +298,14 @@
 			btn.value = songs[i];
 			btn.onclick = function(){
 				change_to_list(this.value, this.pressed);
+				/*
 				if (this.pressed){
 					this.pressed = false;
 					this.className = "button button2";
 				}else{
 					this.pressed = true;
 					this.className = "button button2_clicked";
-				}
+				}*/
 			}
 			list.appendChild(btn);
 			division.appendChild(list);
