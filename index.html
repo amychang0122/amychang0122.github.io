@@ -66,11 +66,33 @@
 				border: 5px outset lightblue;
 				background-color: rgb(255, 255, 255);    
 				text-align: left;
-				text-indent: 20px;
+				text-indent: 10px;
 				margin-top: 10px;
 				width: 500px;
 				height: 500px;
 				color: lightblue;
+				overflow: scroll;
+			}
+			.musicDiv {
+				border: 3px outset #008CBA;
+				background-color: rgb(255, 255, 255);    
+				text-align: left;
+				text-indent: 0px;
+				margin-top: 10px;
+				width: 580px;
+				height: 670px;
+				color: lightblue;
+				overflow: scroll;
+			}
+			.arthorDiv {
+				border: 3px outset #d69c7b;
+				background-color: rgb(255, 255, 255);    
+				text-align: left;
+				margin-top: 10px;
+				padding-left: 5px;
+				width: 300px;
+				height: 632px;
+				color: #9c5a34;
 				overflow: scroll;
 			}
 		</style>
@@ -89,22 +111,24 @@
                     Your browser does not support the audio element.
 				</audio>
 				<br>
-                <input type="button" class="button button1" value="Skip" onclick="skip_music()">
+                <input type="button" class="button button1" value="Next" onclick="next_music()">
                 <input type="button" class="button button1" value="Delete" onclick="delete_music()">
-                <input type="button" class="button button1" value="select_all" onclick="select_all()">
-                <input type="button" class="button button1" value="shuffle" onclick="shuffle()">
+                <input type="button" class="button button1" value="Select All" onclick="select_all()">
+                <input type="button" class="button button1" value="Shuffle" onclick="shuffle()">
                 <h2 id="list" color="black">List</h2>
                 <div class="myDiv" id="list2" style="width:500px;height:500px">
                 </div>
             </div>
-            <div class="play_console" id="music_list" style="width:600px;height:500px" 	>
+            <div class="play_console" style="width:600px;height:500px" 	>
 				<h2>Music list</h2>
+				<div class="musicDiv" id="music_list">
+				</div>
             </div>
             <div class="play_console" id="author_console">
 				<h2>Author list</h2>
 				<button id="reset_arthor" onclick="reset_arthor_list()">Reset</button>
 				<button id="all_arthor" onclick="reset_arthor_list(opposite=true)">Select all</button>
-				<div id="author_list" name="author_list" multiple  style="width:300px;height:500px" >
+				<div class="arthorDiv" id="author_list" name="author_list" multiple>
 				</div>
             </div>
 
@@ -114,8 +138,8 @@
 		var arthors = [];
 		var play_list = [];
 		var candidate_song = [];
-		document.getElementById("audioPlayer").onended = function(){skip_music()};
-		function skip_music(){
+		document.getElementById("audioPlayer").onended = function(){next_music()};
+		function next_music(){
 			play_list.push(play_list[0]);
 			play_list.shift();
 			var path = "./Music/" + play_list[0] + ".mp3";
@@ -153,7 +177,7 @@
 		function select_all(){
 			for (var j=0; j<candidate_song.length; j++){
 				var obj = document.getElementById(candidate_song[j]);
-				if (obj.pressed == false){
+				if (obj.pressed == false && document.getElementById(obj.arthor).checked){
 					console.log(obj.value);
 					change_to_list(obj.value, obj.pressed)
 				}
@@ -218,10 +242,6 @@
 			candidate_song = [];
 			var division = document.getElementById("music_list");
 			division.innerHTML = "";
-			var title = document.createElement("h2");
-			var node = document.createTextNode("Music list");
-			title.appendChild(node);
-			division.appendChild(title);
 			var current_author = document.getElementById("author_list").value;
 			for (i=0; i<songs.length; ++i){
 				candidate_song.push(songs[i]);
@@ -278,7 +298,7 @@
 				}
 				div.appendChild(option);
 				var label = document.createElement("label");
-				label.innerHTML = current_author;
+				label.innerHTML = " "+current_author;
 				div.appendChild(label);
 				div.appendChild(document.createElement("br"));
 			}
