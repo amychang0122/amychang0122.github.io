@@ -14,11 +14,8 @@ f.close()
 
 # backup file
 localtime = time.asctime( time.localtime(time.time()) )
-web = "./index.html"
-backup = "./Backup/index_" + time.strftime("%m%d", time.localtime()) + ".html"
-if not os.path.isfile(backup):
-    shutil.copyfile(web, backup)
-    shutil.copyfile(web, "./index_backup.html")
+web = "./main.js"
+shutil.copyfile(web, "./main_backup.js")
 
 f = open("./music_list.txt", "r", encoding="utf-8")
 read = open(backup, "r", encoding="utf-8")

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" type="text/css" href="./script/style.css">
+		<title id="title">Music</title>
+	</head>
+
+	<body>
+        <div>
+            <h1>Instegram: gucci_0831</h1>
+			<h6>20210613 updated.</h6>
+			<h6>Version: 2.1.0</h6>
+        </div>
+        <div id="music_console">
+            <div class="divStyle" id="track_console">
+                <h2>Player</h2>
+                <audio controls autoplay id="audioPlayer" >
+                    <source id="player" src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+				</audio>
+				<br>
+                <input type="button" class="button button1" value="Next" onclick="next_music()">
+                <input type="button" class="button button1" value="Delete" onclick="delete_music()">
+                <input type="button" class="button button1" value="Select All" onclick="select_all()">
+                <input type="button" class="button button1" value="Shuffle" onclick="shuffle()">
+                <h2 id="list" color="black">List</h2>
+                <div class="myDiv" id="list2">
+                </div>
+            </div>
+            <div class="divStyle">
+				<h2>Music list</h2>
+				<div class="musicDiv" id="music_list">
+				</div>
+            </div>
+            <div class="divStyle" id="author_console">
+				<h2>Author list</h2>
+				<button id="reset_artist" onclick="reset_artist_list()">Reset</button>
+				<button id="all_artist" onclick="reset_artist_list(opposite=true)">Select all</button>
+				<div class="artistDiv" id="author_list" name="author_list" multiple>
+				</div>
+            </div>
+
+        </div>
+
+		<script src="./script/main.js"></script>
+
+	</body>
+</html>
